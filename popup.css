@@ -2,7 +2,7 @@
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #1c1c1e; --fg: #f2f2f7; --mute: #8e8e93; --line: #38383a; --acc: #5ea0ef; --hl: #24303d; --work: #4ac26b; --warn: #ff6b6b; color-scheme: dark; } }
 :root[data-theme="dark"] { --bg: #1c1c1e; --fg: #f2f2f7; --mute: #8e8e93; --line: #38383a; --acc: #5ea0ef; --hl: #24303d; --work: #4ac26b; --warn: #ff6b6b; color-scheme: dark; }
 * { box-sizing: border-box; }
-body { margin: 0; width: min(780px, calc(var(--fs) * 340 / 13)); max-height: 590px; overflow: hidden auto; scrollbar-width: thin; background: var(--bg); color: var(--fg); font: var(--fs) system-ui, sans-serif; }
+body { margin: 0; width: min(780px, calc(var(--fs) * 323 / 13)); max-height: 590px; overflow: hidden auto; scrollbar-width: thin; background: var(--bg); color: var(--fg); font: var(--fs) system-ui, sans-serif; }
 button, select, input { font: inherit; color: inherit; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 3px 7px; }
 button { cursor: pointer; }
 #q { width: 100%; }
