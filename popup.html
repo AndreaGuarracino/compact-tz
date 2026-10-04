@@ -8,19 +8,13 @@
 <script type="module" src="popup.js"></script>
 </head>
 <body>
-<header hidden>
-  <div class="search">
-    <input id="q" placeholder="Add a city, country or time zone" autocomplete="off" aria-label="Add a city, country or time zone">
-    <ul id="hits" hidden></ul>
-  </div>
-</header>
 <div id="doc" hidden>
   <h3>Compact Time Zones</h3>
   <ul>
-    <li>&#8943; opens search: city, country, IANA zone, or EST/PST/CET.</li>
+    <li>&#8943; opens search (city, country, zone, EST/PST/CET) and settings.</li>
     <li>Double-click a name to rename it. Enter saves, Esc cancels.</li>
     <li>Hover: full name and IANA zone.</li>
-    <li>Reorder: drag, Alt+&#8593;/&#8595;, or &#8645; by offset.</li>
+    <li>Reorder: drag, Alt+&#8593;/&#8595;, or &#8943; Sort by UTC offset.</li>
     <li>Keys: &#8593;/&#8595; select, Enter rename, Delete remove.</li>
     <li>&#215; then "Remove?" to delete.</li>
     <li>Date and slider set the time. Now resets.</li>
@@ -32,13 +26,21 @@
   <input id="date" type="date" aria-label="Date">
   <input id="shift" type="range" min="-96" max="96" value="0" aria-label="Shift time">
   <button id="now">Now</button>
-  <button id="sort" title="Sort by UTC offset">&#8645;</button>
   <button id="more" title="Settings">&#8943;</button>
-  <div id="menu" class="pop" hidden>
-    <label>Time <select id="fmt"><option value="24">24-hour</option><option value="12">12-hour</option></select></label>
-    <label>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
-    <label>Font size <select id="fs"><option>13</option><option>16</option><option>20</option><option>26</option><option>32</option></select></label>
-    <button id="docbtn" class="link">Documentation</button>
+</div>
+<div id="menu" hidden>
+  <div class="search">
+    <input id="q" placeholder="Add a city, country or time zone" autocomplete="off" aria-label="Add a city, country or time zone">
+    <ul id="hits" hidden></ul>
+  </div>
+  <div class="row">
+  <label>Time <select id="fmt"><option value="24">24-hour</option><option value="12">12-hour</option></select></label>
+  <label>Theme <select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+  <label>Font size <select id="fs"><option>13</option><option>16</option><option>20</option><option>26</option><option>32</option></select></label>
+  </div>
+  <div class="row">
+  <button id="sort" class="link">Sort by UTC offset</button>
+  <button id="docbtn" class="link">Documentation</button>
   </div>
 </div>
 <ol id="list"></ol>

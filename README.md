@@ -13,7 +13,7 @@ Each row shows the name, the zone abbreviation (EDT, CEST, ...), the UTC offset,
 
 - ⋯ opens the search box and the settings. Search adds a city, a country (English or your browser language), an IANA zone (`Europe/Rome`) or an abbreviation (`PT`, `CEST`, `IST`).
 - Double-click a name to rename it. Enter saves, Esc cancels.
-- Drag a row, or press Alt+Up/Down, to reorder. The sort button orders by UTC offset.
+- Drag a row, or press Alt+Up/Down, to reorder. ⋯ Sort by UTC offset orders the list.
 - The date and the slider (+/-24 h in 15 min steps) change the time to compare.
 - Settings: 12/24-hour, theme, font size.
 - Places sync with your Chrome account. On a fresh install, an optional `places.json` (`[{"tz": "Europe/Rome", "label": "Rome"}]`, git-ignored) fills the list.

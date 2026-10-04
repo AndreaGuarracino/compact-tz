@@ -127,7 +127,7 @@ function add(tz, label) {
   S.places.push(p);
   log('added', tz, label);
   saveAll();
-  $('#q').value = ''; $('#hits').hidden = $('header').hidden = true; render();
+  $('#q').value = ''; $('#hits').hidden = $('#menu').hidden = true; render();
 }
 
 // Load city catalog on first search
@@ -186,7 +186,6 @@ function applyTheme() {
 
 // Wire controls
 $('#q').oninput = async (e) => {
-  $('#menu').hidden = true;
   const q = e.target.value, c = await catalog();
   if (q !== $('#q').value) return;
   hits = search(q, c); hitOn = 0; showHits();
@@ -196,16 +195,15 @@ $('#q').onkeydown = (e) => {
   if (e.key === 'Enter' && hits[hitOn]) add(hits[hitOn].tz, hits[hitOn].label);
   if (e.key === 'Escape') $('#hits').hidden = true;
 };
-$('#q').onblur = () => ($('#hits').hidden = true);
 $('#shift').oninput = (e) => { shift = +e.target.value; render(); };
 $('#date').onchange = (e) => { dayOff = Math.round((new Date(e.target.value) - new Date(ymd(new Date()))) / 864e5) || 0; render(); };
 $('#now').onclick = () => { shift = dayOff = 0; $('#shift').value = 0; render(); };
 $('#sort').onclick = () => {
   const d = new Date(), off = (tz) => new Date(d.toLocaleString('en-US', { timeZone: tz })) - new Date(d.toLocaleString('en-US', { timeZone: 'UTC' }));
-  S.places.sort((a, b) => off(a.tz) - off(b.tz)); saveAll(); render();
+  S.places.sort((a, b) => off(a.tz) - off(b.tz)); $('#menu').hidden = true; saveAll(); render();
 };
-$('#more').onclick = () => { const h = !$('#menu').hidden; $('#menu').hidden = $('header').hidden = h; $('#doc').hidden = true; if (!h) $('#q').focus(); };
-$('#docbtn').onclick = () => { $('#menu').hidden = $('header').hidden = true; $('#doc').hidden = false; };
+$('#more').onclick = () => { const h = !$('#menu').hidden; $('#menu').hidden = h; $('#doc').hidden = true; if (!h) $('#q').focus(); };
+$('#docbtn').onclick = () => { $('#menu').hidden = true; $('#doc').hidden = false; };
 $('#docclose').onclick = () => ($('#doc').hidden = true);
 $('#fs').onchange = (e) => { S.fs = e.target.value; save('fs'); applyTheme(); };
 $('#fmt').onchange = (e) => { S.fmt = e.target.value; save('fmt'); render(); };
