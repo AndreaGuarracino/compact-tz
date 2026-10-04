@@ -5,6 +5,7 @@
 body { margin: 0; width: min(780px, calc(var(--fs) * 323 / 13)); max-height: 590px; overflow: hidden auto; scrollbar-width: thin; background: var(--bg); color: var(--fg); font: var(--fs) system-ui, sans-serif; }
 button, select, input { font: inherit; color: inherit; background: none; border: 1px solid var(--line); border-radius: 6px; padding: 3px 7px; }
 button { cursor: pointer; }
+select, option { background: var(--bg); color: var(--fg); }
 #q { width: 100%; }
 #hits { margin: 4px 0 0; padding: 0; list-style: none; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; max-height: 11em; overflow: auto; }
 #hits li { padding: 5px 8px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
