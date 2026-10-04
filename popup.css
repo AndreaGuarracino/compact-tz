@@ -13,8 +13,8 @@ header { display: flex; gap: 4px; padding: 8px; border-bottom: 1px solid var(--l
 #hits li { padding: 5px 8px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
 #hits li.on, #hits li:hover { background: var(--hl); }
 #hits small { color: var(--mute); }
-.pop { position: absolute; z-index: 4; right: 8px; top: 3.2em; max-height: 85vh; overflow: auto; display: grid; gap: 6px; padding: 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 4px 16px #0003; }
-.when { display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+.pop { position: absolute; z-index: 4; right: 8px; top: 100%; max-height: 85vh; overflow: auto; display: grid; gap: 6px; padding: 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 4px 16px #0003; }
+.when { position: relative; display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 #shift { flex: 1; border: 0; padding: 0; }
 #list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr) repeat(6, auto); }
 #list li { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; gap: 0 .5em; align-items: baseline; padding: 3px 8px; border-bottom: 1px solid var(--line); cursor: grab; outline: none; }
