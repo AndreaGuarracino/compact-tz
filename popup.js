@@ -213,7 +213,7 @@ $('#theme').onchange = (e) => { S.theme = e.target.value; save('theme'); applyTh
 function load() {
   store.get(null, async (got) => {
     if (chrome.runtime.lastError) console.error('[ctz] load failed', chrome.runtime.lastError.message);
-    S.fmt = got.fmt || S.fmt; S.theme = got.theme || S.theme; S.fs = got.fs || S.fs;
+    S.fmt = got.fmt || S.fmt; S.theme = got.theme || S.theme; S.fs = ['16', '20', '24', '28'].includes(got.fs) ? got.fs : S.fs;
     if (got.order) S.places = got.order.filter((id) => got['p:' + id]).map((id) => ({ id, tz: got['p:' + id].tz, label: got['p:' + id].label }));
     else {
       try { S.places = (await (await fetch('places.json')).json()).map((p) => ({ id: uid(), tz: p.tz, label: p.label })); saveAll(); log('restored', S.places.length, 'places from places.json'); }
