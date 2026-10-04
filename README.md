@@ -12,7 +12,7 @@ Each row shows the name, the zone abbreviation (EDT, CEST, ...), the UTC offset,
 ## Use
 
 - ⋯ opens the search box and the settings. Search adds a city, a country (English or your browser language), an IANA zone (`Europe/Rome`) or an abbreviation (`PT`, `CEST`, `IST`).
-- Double-click a name to rename it. Enter saves, Esc cancels.
+- Double-click a name to rename it (Enter saves, Esc cancels), or click × and then Remove? to delete it.
 - Drag a row, or press Alt+Up/Down, to reorder. ⋯ Sort by UTC offset orders the list.
 - The date and the slider (+/-24 h in 15 min steps) change the time to compare.
 - Settings: 12/24-hour, theme, font size.

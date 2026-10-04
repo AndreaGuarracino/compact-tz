@@ -113,17 +113,19 @@ function render() {
     li.className = [h >= 9 && h < 18 ? 'work' : h >= 22 || h < 8 ? 'night' : '', home ? 'home' : ''].join(' ');
     li.tabIndex = 0;
     li.dataset.id = p.id;
-    li.innerHTML = '<span class="main"><span class="label"></span></span><span class="abbr"></span><span class="utc"></span><span class="date"></span><span class="day"></span><span class="time"></span><button class="x" title="Remove">&#215;</button>';
-    const [main, label, ab, utc, date, day, time, x] = li.querySelectorAll('*');
+    li.innerHTML = '<span class="main"><span class="label"></span><button class="x" title="Remove">&#215;</button></span><span class="abbr"></span><span class="utc"></span><span class="date"></span><span class="day"></span><span class="time"></span>';
+    const [main, label, x, ab, utc, date, day, time] = li.querySelectorAll('*');
     label.textContent = p.label;
     main.title = `${p.label}\n${p.tz}${home ? ' (your time zone)' : ''}`;
     [ab.textContent, utc.textContent, date.textContent, day.textContent, time.textContent] = cells(d, p.tz, here);
-    main.ondblclick = () => edit(label, p);
+    main.ondblclick = (e) => e.target !== x && edit(label, p);
+    x.onmousedown = (e) => e.preventDefault();
     x.onclick = (e) => {
       e.stopPropagation();
       if (x.classList.contains('sure')) return remove(i);
       x.classList.add('sure'); x.textContent = 'Remove?';
       setTimeout(() => { x.classList.remove('sure'); x.innerHTML = '&#215;'; }, 3000);
+      label.focus();
     };
     li.onkeydown = (e) => {
       if (e.target !== li) return;
@@ -132,7 +134,7 @@ function render() {
       else if (e.key === 'ArrowUp') { e.preventDefault(); li.previousElementSibling?.focus(); }
       else if (e.key === 'ArrowDown') { e.preventDefault(); li.nextElementSibling?.focus(); }
       else if (e.key === 'Enter') edit(label, p);
-      else if (e.key === 'Delete') x.click();
+      else if (e.key === 'Delete') { edit(label, p); x.click(); }
     };
     li.onmousedown = (e) => { li.draggable = !e.target.isContentEditable; };
     li.ondragstart = () => { dragFrom = i; li.classList.add('drag'); };
