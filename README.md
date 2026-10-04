@@ -16,7 +16,7 @@ Each row shows the name, the zone abbreviation (EDT, CEST, ...), the UTC offset,
 - Drag a row, or press Alt+Up/Down, to reorder. The sort button orders by UTC offset.
 - The date and the slider (+/-24 h in 15 min steps) change the time to compare.
 - Settings: 12/24-hour, theme, font size.
-- Places sync with your Chrome account.
+- Places sync with your Chrome account. On a fresh install, an optional `places.json` (`[{"tz": "Europe/Rome", "label": "Rome"}]`, git-ignored) fills the list.
 
 ## City data
 
