@@ -73,6 +73,34 @@ function remove(i) {
   store.remove('p:' + p.id, done('remove ' + p.id)); saveAll(); render();
 }
 
+// Cell texts for one place
+function cells(d, tz, here) {
+  const diff = Math.round((new Date(ymd(d, tz)) - new Date(here)) / 864e5);
+  return [abbr(d, tz), offset(d, tz), dtf('en-GB', tz, { weekday: 'short', day: 'numeric', month: 'short' }).format(d), diff ? `${diff > 0 ? '+' : ''}${diff}d` : '', fmtTime(d, tz)];
+}
+
+// Fix column widths over slider range
+let colKey = '';
+function fixCols() {
+  const li = $('#list li'), key = [dayOff, S.fmt, S.fs, ...S.places.map((p) => p.tz)].join('|');
+  if (!li || key === colKey) return;
+  colKey = key;
+  const probe = document.createElement('div'), w = [0, 0, 0, 0, 0];
+  probe.className = 'work';
+  probe.style.cssText = 'position: absolute; visibility: hidden; white-space: nowrap';
+  probe.innerHTML = '<span class="abbr"></span><span class="utc"></span><span class="date"></span><span class="day"></span><span class="time"></span>';
+  document.body.append(probe);
+  const spans = [...probe.children];
+  const base = Math.round(Date.now() / STEP) * STEP + dayOff * 864e5;
+  for (let h = -24; h <= 24; h++) {
+    const d = new Date(base + h * 36e5), here = ymd(d);
+    for (const p of S.places) cells(d, p.tz, here).forEach((t, i) => { spans[i].textContent = t; w[i] = Math.max(w[i], spans[i].getBoundingClientRect().width); });
+  }
+  probe.remove();
+  $('#list').style.gridTemplateColumns = `0 minmax(0, 1fr) ${w.map((x) => Math.ceil(x) + 'px').join(' ')} 0`;
+  log('columns', w.map(Math.ceil).join(' '), 'px for', key);
+}
+
 // Draw all place rows
 function render() {
   const d = instant(), here = ymd(d);
@@ -80,7 +108,6 @@ function render() {
   $('#date').value = ymd(new Date(Date.now() + dayOff * 864e5));
   $('#list').replaceChildren(...S.places.map((p, i) => {
     const li = document.createElement('li');
-    const diff = Math.round((new Date(ymd(d, p.tz)) - new Date(here)) / 864e5);
     const h = +dtf('en-GB', p.tz, { hour: 'numeric', hourCycle: 'h23' }).format(d);
     const home = canon(p.tz) === HOME;
     li.className = [h >= 9 && h < 18 ? 'work' : h >= 22 || h < 8 ? 'night' : '', home ? 'home' : ''].join(' ');
@@ -90,11 +117,7 @@ function render() {
     const [main, label, ab, utc, date, day, time, x] = li.querySelectorAll('*');
     label.textContent = p.label;
     main.title = `${p.label}\n${p.tz}${home ? ' (your time zone)' : ''}`;
-    ab.textContent = abbr(d, p.tz);
-    utc.textContent = offset(d, p.tz);
-    date.textContent = dtf('en-GB', p.tz, { weekday: 'short', day: 'numeric', month: 'short' }).format(d);
-    day.textContent = diff ? `${diff > 0 ? '+' : ''}${diff}d` : '';
-    time.textContent = fmtTime(d, p.tz);
+    [ab.textContent, utc.textContent, date.textContent, day.textContent, time.textContent] = cells(d, p.tz, here);
     main.ondblclick = () => edit(label, p);
     x.onclick = (e) => {
       e.stopPropagation();
@@ -120,6 +143,7 @@ function render() {
     return li;
   }));
   if (focusId) { $(`#list li[data-id="${focusId}"]`)?.focus(); focusId = null; }
+  fixCols();
 }
 
 function add(tz, label) {
