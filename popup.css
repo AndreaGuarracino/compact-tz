@@ -10,7 +10,7 @@ button { cursor: pointer; }
 #hits li { padding: 5px 8px; cursor: pointer; display: flex; justify-content: space-between; gap: 8px; }
 #hits li.on, #hits li:hover { background: var(--hl); }
 #hits small { color: var(--mute); }
-#menu { display: grid; gap: 6px; margin: 6px 8px; padding: 8px; border: 1px solid var(--mute); border-radius: 8px; background: var(--bg); }
+#menu { display: grid; gap: .3em; margin: .3em .4em; padding: .4em; border: 1px solid var(--mute); border-radius: 8px; background: var(--bg); }
 .when { display: flex; gap: 6px; align-items: center; padding: 6px 8px; border-bottom: 1px solid var(--line); }
 #shift { flex: 1; border: 0; padding: 0; }
 #list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr) repeat(6, auto); }
@@ -32,6 +32,6 @@ li:hover .x, .x.sure { visibility: visible; }
 #doc { display: grid; gap: 6px; padding: 8px; font-size: .8em; line-height: 1.4; border-bottom: 1px solid var(--line); }
 #doc h3 { margin: 0; font-size: 1.1em; }
 #doc ul { margin: 0; padding-left: 1.2em; }
-#menu .row { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; }
-#menu .link { border: 0; padding: 0; color: var(--acc); text-align: left; }
+#menu .row { display: flex; flex-wrap: wrap; justify-content: center; gap: .3em .6em; align-items: center; }
+#menu .btns { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; justify-content: center; gap: .6em; }
 [hidden] { display: none !important; }
